@@ -1,13 +1,15 @@
-# blastp_search
+# MCP Stage 2 — 工程化 server(复用成熟核心 + resource)
 
-✅️使用方法
-一、配好从你电脑到服务器的免密 SSH(否则 Codex 自动连时会卡在输密码)
-Codex 是在后台把 ssh ... 当子进程启动的,没有交互终端给你输密码,SSH 要么读不到密码直接失败,要么卡住
-⚠️现在这个 MCP 是 stdio 方式,它有个硬限制:stdio 的客户端和服务器必须在同一台机器上(客户端要把 server 当本地子进程启动,靠标准输入输出通信)。电脑Codex 没法直接把"另一台服务器上的 Python 文件"当本地子进程拉起来。通过SSH 隧道，让 Codex 还是以为在本地跑,实际通过 SSH 到服务器上执行。
+两处升级:
 
-"公私钥"-ssh-keygen -t ed25519
+1. 工具内部改用**主线 stage5 的成熟核心**(`blast_core.py` 带校验/结构化结果,`errors.py` 分类异常)——这三个文件是从 stage5 复制来的(`config.py` 仅改了路径深度),体现"同一套核心,换协议不改"。
+2. 新增一个 **resource**:`blast://database/info`。MCP 不只有 tool(可执行动作),还有 resource(可读数据)。
 
-二、codex的Plugins中进行配置
+- `mcp_server.py` —— `@mcp.tool()` 暴露 blastp_search;`@mcp.resource(...)` 暴露数据库信息。
+- `test_client.py` —— 列出工具**和资源**,各调用/读取一次(不需要 LLM key)。
 
-✅️解释
+```bash
+python test_client.py
+```
 
+**重点**:tool vs resource 的区别;以及"成熟核心可以直接挂到 MCP 上"。
