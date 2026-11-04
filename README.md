@@ -12,6 +12,7 @@ stdio 方式,客户端和服务器必须在同一台机器上(客户端要把 se
 
 二、结构
 
+'''
 mcp_server.py
       │
       ├── config.py
@@ -21,7 +22,7 @@ mcp_server.py
               ├── 调用系统 blastp
               └── 读取本地 BLAST 数据库
 
-
+'''
 
 
 
