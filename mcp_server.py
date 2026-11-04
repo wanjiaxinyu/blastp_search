@@ -14,7 +14,7 @@ def blastp_search(sequence: str) -> str:
     """用 BLASTP 把一段蛋白序列与本地蛋白数据库比对,找出最相似的已知蛋白。
     输入一段蛋白序列,返回最相似的几条命中(含一致性和 E-value)。"""
     try:
-        hits = run_blastp(sequence)          # 成熟核心:内部会校验、出错抛 BlastError
+        hits = run_blastp(sequence)          
         return format_hits(hits)
     except BlastError as exc:
         return "BLAST 出错:" + str(exc)
