@@ -23,7 +23,7 @@ def blastp_search(sequence: str) -> str:
 @mcp.resource("blast://database/info")
 def database_info() -> str:
     """把当前 BLAST 数据库的信息暴露成一个可读资源(resource,不是可执行的 tool)。"""
-    fasta = os.path.join(config.ROOT, "data", "demo_proteins.fasta")
+    fasta = os.path.join(config.ROOT, "data", "uniprot_sprot.fasta")
     n = 0
     if os.path.exists(fasta):
         with open(fasta) as f:
@@ -33,7 +33,6 @@ def database_info() -> str:
         "路径: " + config.DB + "\n"
         "序列条数: " + str(n) + "\n"
         "类型: 蛋白(protein)\n"
-        "说明: 演示用合成序列,可用 blastp_search 工具进行比对。"
     )
 
 
