@@ -1,19 +1,3 @@
-"""MCP stage 2:工程化的 MCP server —— 复用 stage5 的成熟核心,并新增一个 resource。
-
-相比 stage1,两处升级:
-  1) 工具内部改用 stage5 那套成熟核心(blast_core:带校验、结构化结果;errors:分类异常),
-     体现"同一套核心既能给 LangChain 用,也能挂到 MCP 上"——换协议不改核心。
-  2) 新增一个 MCP **resource**:MCP 不只有 tool(可执行动作),还有 resource(可读数据)。
-     这里把"当前数据库的信息"暴露成一个资源,客户端可以读取它。
-
-注意:blast_core / errors / config 这三个文件是从 stage5 复制过来的(config 仅调整了路径深度),
-其余原样——这就是"复用成熟核心"的直接体现。
-
-跑 / 验证:
-    python mcp_server.py          # 启动(stdio 等待连接)
-    python test_client.py         # 连上来,列出工具+资源、各调用一次(不需要 LLM key)
-"""
-
 import os
 
 from mcp.server.fastmcp import FastMCP
