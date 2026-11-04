@@ -22,6 +22,10 @@ mcp_server.py
               ├── 调用系统 blastp
               └── 读取本地 BLAST 数据库
 
+config.py 集中管理 .env、数据库路径、E-value、最大命中数等配置
+errors.py 定义统一的 BLAST 异常体系 
+blast_core.py 核心业务层：清洗序列、校验、执行 blastp、解析结果
+mcp_server.py MCP 服务入口，向外暴露工具和资源
 ```
 
 
